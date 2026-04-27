@@ -1,0 +1,37 @@
+{
+  "_comment": "This is an EXAMPLE. Replace with your actual model config or drop your own JSON here.",
+  "_instructions": [
+    "1. Set 'feature_names' to exactly the same column names your model was trained on (same order!)",
+    "2. Set 'target' to the name of your target column (e.g. 'DGI')",
+    "3. Fill in 'training_info' for documentation purposes (optional)",
+    "4. Drop model.pkl alongside this file in the backend/ folder",
+    "5. Run: uvicorn main:app --reload"
+  ],
+
+  "feature_names": [
+    "DNI",
+    "DHI",
+    "KT",
+    "Temperature",
+    "Humidity",
+    "WindSpeed",
+    "Precipitation"
+  ],
+
+  "target": "DGI",
+
+  "training_info": {
+    "algorithm": "RandomForestRegressor",
+    "n_estimators": 100,
+    "r2_score": 0.92,
+    "rmse": 0.045,
+    "train_samples": 5000,
+    "trained_on": "2024-01-01"
+  },
+
+  "metadata": {
+    "project": "RayScale",
+    "version": "1.0",
+    "description": "Daily Growth Index prediction from solar and weather inputs"
+  }
+}

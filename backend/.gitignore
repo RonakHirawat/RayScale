@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+venv/
+.venv/
+
+# Model files (large, don't commit to git - share separately)
+model.pkl
+model_config.json
+*.joblib
+*.h5
+*.onnx
