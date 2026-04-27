@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import {
   Sun, Wind, Droplets, Thermometer, Wifi,
-  Loader2, CloudRain, Zap, SlidersHorizontal
+  Loader2, CloudRain, Zap, SlidersHorizontal,
+  MapPin, Navigation
 } from 'lucide-react';
 import { fetchWeatherByCoords, getUserLocation } from '../utils/weatherApi';
 
@@ -126,6 +127,41 @@ export default function InputPanel({ onPredict, loading }) {
           >
             📡 Live Data
           </button>
+        </div>
+      </div>
+
+      {/* ── Location Parameters ── */}
+      <div>
+        <div className="section-label flex justify-between items-center w-full">
+          <div className="flex items-center gap-1.5">
+            <MapPin className="w-3.5 h-3.5" style={{ color: '#a78bfa' }} />
+            Location
+          </div>
+          <button 
+            onClick={async () => {
+              setWeatherMsg(null);
+              try {
+                const pos = await getUserLocation();
+                setInputs(prev => ({...prev, latitude: pos.lat.toFixed(4), longitude: pos.lon.toFixed(4)}));
+              } catch (e) {
+                setWeatherMsg({ type: 'error', text: 'Failed to get location. Please allow location access.' });
+              }
+            }}
+            className="text-xs flex items-center gap-1 hover:text-purple-400 transition-colors cursor-pointer"
+            style={{ color: 'rgba(167,139,250,0.8)' }}
+            title="Get My Location"
+          >
+            <Navigation className="w-3 h-3" />
+            Get Current
+          </button>
+        </div>
+        <div className="grid grid-cols-2 gap-2 mt-2">
+          <InputRow label="Latitude" icon={MapPin} iconColor="#a78bfa"
+            name="latitude" value={inputs.latitude} onChange={handleChange}
+            placeholder="-90 to 90" />
+          <InputRow label="Longitude" icon={MapPin} iconColor="#a78bfa"
+            name="longitude" value={inputs.longitude} onChange={handleChange}
+            placeholder="-180 to 180" />
         </div>
       </div>
 
